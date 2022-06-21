@@ -1,8 +1,8 @@
-CREATE TABLE users (
-id int NOT NULL PRIMARY KEY AUTO_INCREMENT ,
-email NOT NULL UNIQUE varchar(100),
-password NOT NULL varchar(100),
-name NOT NULL varchar(50),
-address varchar(100),
-created_at DATETIME DEFAULT NOW()
+CREATE TABLE `users` (
+  `id` int NOT NULL PRIMARY KEY AUTO_INCREMENT,
+  `email` varchar(100) NOT NULL,
+  `password` varchar(100) NOT NULL,
+  `name` varchar(50) NOT NULL,
+  `address` varchar(100),
+  `created_at` DATETIME DEFAULT NOW()
 );
