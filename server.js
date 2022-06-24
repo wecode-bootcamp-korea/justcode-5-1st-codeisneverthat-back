@@ -16,7 +16,7 @@ app.get('/ping', (req, res) => {
 });
 
 const server = http.createServer(app);
-const PORT = process.env.PORT || 10010;
+const PORT = process.env.PORT || 3306;
 server.listen(PORT, () => {
   console.log(`server start : http://localhost:${PORT}/`);
 });
