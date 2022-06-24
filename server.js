@@ -4,12 +4,14 @@ const http = require('http');
 const express = require('express');
 const cors = require('cors');
 
-const routes = require('./routes');
+const userRouter = require('./routes/user');
+const productRouter = require('./routes/product');
 
 const app = express();
 app.use(cors());
 app.use(express.json());
-app.use(routes);
+app.use(userRouter);
+app.use(productRouter);
 
 app.get('/ping', (req, res) => {
   res.json({ message: 'pong' });
