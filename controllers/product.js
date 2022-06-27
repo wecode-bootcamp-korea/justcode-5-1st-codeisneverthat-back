@@ -4,7 +4,7 @@ const readTop20Controller = async (req, res) => {
   try {
     const top20 = await readTop20();
     console.log(top20);
-    return res.status(200).json({ data: top20 });
+    return res.status(200).json(top20);
   } catch (err) {
     res.status(err.statusCode || 500).json({ message: err.message });
   }
