@@ -40,7 +40,7 @@ model product_color {
   product_details product_details[]
   product_images  product_images[]
 
-  @@index([color_id], map: "fk_product_color_color_id_color_id")
+  @@index([color_id], map: "fk_color_color_id_color_id")
   @@index([product_id], map: "fk_product_product_id_products_id")
 }
 
