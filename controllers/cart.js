@@ -1,5 +1,5 @@
 const { getCartById } = require('../models/cart');
-const {addCartItem}= require ('../services/cart');
+const {addCartItem, deleteCartItem, updateCartItem }= require ('../services/cart');
 
 const cartItemController = async (req,res) => {
     const {user_id} = req.body;  
@@ -17,5 +17,20 @@ const addCartItemController = async (req,res)=>{
 
 };
 
+const deleteItemController = async (req,res) => {
+    const {user_id, product_details_id} = req.body;
+    await deleteCartItem(user_id, product_details_id); 
 
-module.exports = {cartItemController, addCartItemController};
+    res.status(201).json({message:"item deleted successfully"})
+
+};
+
+const updateItemController = async (req, res) => {
+    const {user_id,product_details_id, quantity} = req.body; 
+    await updateCartItem(user_id, product_details_id,  quantity);
+
+    res.status(201).json({message:"item updated successfully"})
+};
+
+
+module.exports = {cartItemController, addCartItemController, deleteItemController, updateItemController};

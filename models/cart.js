@@ -37,4 +37,27 @@ async function addItem(addItemDto) {
 
 }
 
-module.exports = { getCartById, addItem };
+async function deleteItem(deleteItemDto) {
+    const {user_id, product_details_id} = deleteItemDto;
+
+    await prisma.$queryRaw`
+        DELETE FROM CART 
+        WHERE ${user_id} = cart.user_id AND ${product_details_id} = cart.product_details_id; 
+    `;
+}
+
+async function updateItem(updateItemDto) {
+
+    const {user_id, product_details_id, quantity } = updateItemDto; 
+    await prisma.$queryRaw`
+
+        UPDATE 
+            cart
+        SET
+            quantity = ${quantity}
+        WHERE ${user_id} = cart.user_id AND ${product_details_id} = cart.product_details_id; 
+    `;
+
+}
+
+module.exports = { getCartById, addItem , deleteItem, updateItem};
