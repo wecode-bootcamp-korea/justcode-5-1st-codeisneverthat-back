@@ -3,6 +3,8 @@ const res = require('express/lib/response');
 const jwt = require('jsonwebtoken');
 const { readUserByEmail, createUser } = require('../models/user');
 
+const salt = bcrypt.genSaltSync();
+
 async function signup(email, password) {
   if (password.length < 5) {
     const error = new Error('비밀번호는 최소 5자 입니다');
@@ -40,7 +42,7 @@ async function login(email, password) {
   const user = await readUserByEmail(email);
 
   if (bcrypt.compareSync(password, user.password)) {
-    const token = jwt.sign({ id: user.id }, process.env.SECRETE_KEY, {
+    const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
       expiresIn: '1d',
     });
     return token;

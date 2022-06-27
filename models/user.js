@@ -7,7 +7,7 @@ async function createUser(createUserDto) {
   await prisma.$queryRaw`
    INSERT INTO
     users (email, password)
-  VALUES (${email}, ${password})`;
+   VALUES (${email}, ${password})`;
 }
 
 async function readUserByEmail(email) {
