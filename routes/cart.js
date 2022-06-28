@@ -3,7 +3,7 @@ const { cartItemController, addCartItemController, deleteItemController, updateI
 
 const routes = express.Router();
 
-routes.get('/cart', cartItemController);
+routes.get('/cart/:id', cartItemController);
 routes.post('/cart', addCartItemController);
 routes.delete('/cart', deleteItemController);
 routes.put('/cart', updateItemController)

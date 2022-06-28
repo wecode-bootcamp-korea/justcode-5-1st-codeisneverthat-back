@@ -2,9 +2,9 @@ const { getCartById } = require('../models/cart');
 const {addCartItem, deleteCartItem, updateCartItem }= require ('../services/cart');
 
 const cartItemController = async (req,res) => {
-    const {user_id} = req.body;  
-    const cartItems =  await getCartById(user_id);
-    return res.json( cartItems);
+    const {id} = req.params; 
+    const cartItems =  await getCartById(id);
+    return res.json(cartItems);
 
 
 };
