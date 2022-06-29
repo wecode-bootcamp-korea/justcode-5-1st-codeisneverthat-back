@@ -1,9 +1,8 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-
-    async function getCartById(user_id) {
-        const  cart  = prisma.$queryRaw`
+async function getCartById(user_id) {
+  const cart = prisma.$queryRaw`
      SELECT 
          cart.id,
          products.name,
@@ -12,7 +11,7 @@ const prisma = new PrismaClient();
          cart.quantity,
          color.color,
          size.size
-     FROM users INNER JOIN cart on ${user_id} = cart.user_id
+     FROM users INNER JOIN cart on ${user_id.id} = cart.user_id
              LEFT JOIN product_details on cart.product_details_id = product_details.id 
              LEFT JOIN size on product_details.size_id = size.id 
             LEFT JOIN product_color on product_details.product_color_id = product_color.id
@@ -23,33 +22,30 @@ const prisma = new PrismaClient();
     WHERE MOD(product_images.id,2) = 0
      `;
 
-   return cart;
+  return cart;
 }
 
 async function addItem(addItemDto) {
-    const {user_id, product_details_id, quantity} = addItemDto; 
+  const { user_id, product_details_id, quantity } = addItemDto;
 
-    await prisma.$queryRaw`
+  await prisma.$queryRaw`
         INSERT INTO cart (user_id, product_details_id, quantity)
         VALUES (${user_id}, ${product_details_id}, ${quantity});
     `;
-
-
 }
 
 async function deleteItem(deleteItemDto) {
-    const {user_id, product_details_id} = deleteItemDto;
+  const { user_id, product_details_id } = deleteItemDto;
 
-    await prisma.$queryRaw`
+  await prisma.$queryRaw`
         DELETE FROM CART 
         WHERE ${user_id} = cart.user_id AND ${product_details_id} = cart.product_details_id; 
     `;
 }
 
 async function updateItem(updateItemDto) {
-
-    const {user_id, product_details_id, quantity } = updateItemDto; 
-    await prisma.$queryRaw`
+  const { user_id, product_details_id, quantity } = updateItemDto;
+  await prisma.$queryRaw`
 
         UPDATE 
             cart
@@ -57,7 +53,6 @@ async function updateItem(updateItemDto) {
             quantity = ${quantity}
         WHERE ${user_id} = cart.user_id AND ${product_details_id} = cart.product_details_id; 
     `;
-
 }
 
-module.exports = { getCartById, addItem , deleteItem, updateItem};
+module.exports = { getCartById, addItem, deleteItem, updateItem };
