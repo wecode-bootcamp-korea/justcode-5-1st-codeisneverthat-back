@@ -3,24 +3,28 @@ const prisma = new PrismaClient();
 
 async function getCartById(user_id) {
   const cart = prisma.$queryRaw`
-     SELECT 
-         cart.id,
-         products.name,
-         product_images.url,
-         products.price,
-         cart.quantity,
-         color.color,
-         size.size
-     FROM users INNER JOIN cart on ${user_id.id} = cart.user_id
-             LEFT JOIN product_details on cart.product_details_id = product_details.id 
-             LEFT JOIN size on product_details.size_id = size.id 
-            LEFT JOIN product_color on product_details.product_color_id = product_color.id
-            LEFT JOIN color on product_color.color_id = color.id
-            LEFT JOIN products on product_color.product_id = products.id
-            LEFT JOIN product_images on product_color.id = product_images.product_color_id
-    WHERE MOD(product_images.id,2) = 0
-     `;
 
+        SELECT
+            cart.id,
+            p.name,
+            p.price,
+            color.color,
+            size.size,
+            pi.url,
+            cart.quantity
+        FROM cart
+            JOIN product_details AS pd ON cart.product_details_id = pd.id
+            JOIN product_color AS pc ON pd.product_color_id = pc.id
+            JOIN products AS p on pc.product_id = p.id
+            JOIN color on pc.color_id = color.id
+            JOIN size on pd.size_id = size.id
+            JOIN (
+                SELECT *
+                FROM product_images
+                WHERE MOD(product_images.id, 2) = 1
+            ) AS pi on pi.product_color_id = pc.id
+        where user_id=${user_id.id}
+    `;
   return cart;
 }
 

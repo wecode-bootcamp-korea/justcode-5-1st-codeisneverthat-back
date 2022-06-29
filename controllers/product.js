@@ -16,7 +16,8 @@ const readTop20Controller = async (req, res) => {
 
 const readProductDetailsController = async (req, res) => {
   try {
-    const { id } = req.params;
+    const { id } = req.query;
+    console.log('id :', id);
     const [productDetails] = await readProductDetails(id);
     console.log(productDetails);
     return res.status(200).json({ data: productDetails });
