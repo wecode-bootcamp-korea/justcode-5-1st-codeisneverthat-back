@@ -24,7 +24,7 @@ async function readTop20() {
 }
 
 //제품 상세 정보 불러오기
-async function readProductDetails(category) {
+async function readProductDetails(id) {
   const productDetails = await prisma.$queryRaw`
     SELECT
       p.id AS productId,

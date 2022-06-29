@@ -7,8 +7,8 @@ const express = require('express');
 
 const router = express.Router();
 
-router.get('/top20', readTop20Controller);
-router.get('/product/:id', readProductDetailsController);
-router.get('/collection', readCollectionListByCategoryController);
+routes.get('/top20', readTop20Controller);
+routes.get('/product/:id', readProductDetailsController);
+routes.get('/collection', readCollectionListByCategoryController);
 
 module.exports = router;
