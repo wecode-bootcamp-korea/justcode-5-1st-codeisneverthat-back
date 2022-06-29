@@ -24,7 +24,7 @@ async function readTop20() {
 }
 
 //제품 상세 정보 불러오기
-async function readProductDetails(id) {
+async function readProductDetails(category) {
   const productDetails = await prisma.$queryRaw`
     SELECT
       p.id AS productId,
@@ -65,13 +65,13 @@ async function readProductDetails(id) {
   return productDetails;
 }
 
-async function readCollectionListByCategory(id) {
+async function readCollectionListByCategory(category) {
   const collectionListByCategory = await prisma.$queryRawUnsafe(`
   SELECT
       p.id AS productId,
       p.name AS productName,
       p.price,
-      cg.id AS categoryId,
+      cg.category AS categoryName,
       pa.colorImage,
       piJA.stockBySize
   FROM (
@@ -99,7 +99,7 @@ async function readCollectionListByCategory(id) {
       JOIN color ccc on ccc.id = pcc.color_id
       GROUP BY pcc.product_id) piJA on piJA.product_id = p.id
   GROUP BY pa.product_id
-  ${id ? `HAVING categoryId = ${id}` : ``}
+  ${category ? `HAVING categoryName = '${category}'` : ``}
   `);
   return collectionListByCategory;
 }

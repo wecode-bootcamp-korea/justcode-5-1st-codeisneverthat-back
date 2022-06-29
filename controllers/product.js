@@ -27,8 +27,8 @@ const readProductDetailsController = async (req, res) => {
 
 const readCollectionListByCategoryController = async (req, res) => {
   try {
-    const { id } = req.query;
-    const collectionList = await readCollectionListByCategory(id);
+    const { category } = req.query;
+    const collectionList = await readCollectionListByCategory(category);
     console.log(collectionList);
     return res.status(200).json({ data: collectionList });
   } catch (err) {
