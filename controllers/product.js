@@ -19,7 +19,7 @@ const readProductDetailsController = async (req, res) => {
     const { id } = req.query;
     console.log('id :', id);
     const [productDetails] = await readProductDetails(id);
-    console.log(productDetails);
+    console.log('productDetails', productDetails);
     return res.status(200).json({ data: productDetails });
   } catch (err) {
     res.status(err.statusCode || 500).json({ message: err.message });
