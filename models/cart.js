@@ -10,7 +10,8 @@ async function getCartById(user_id) {
             color.color,
             size.size,
             pi.url,
-            cart.quantity
+            cart.quantity,
+            cart.product_details_id
         FROM cart
             JOIN product_details AS pd ON cart.product_details_id = pd.id
             JOIN product_color AS pc ON pd.product_color_id = pc.id
@@ -48,7 +49,6 @@ async function deleteItem(deleteItemDto) {
 async function updateItem(updateItemDto) {
   const { user_id, product_details_id, quantity } = updateItemDto;
   await prisma.$queryRaw`
-
         UPDATE 
             cart
         SET
