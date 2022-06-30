@@ -3,7 +3,6 @@ const prisma = new PrismaClient();
 
 async function getCartById(user_id) {
   const cart = prisma.$queryRaw`
-
         SELECT
             cart.id,
             p.name,
