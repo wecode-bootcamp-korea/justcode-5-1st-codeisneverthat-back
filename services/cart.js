@@ -24,7 +24,6 @@ async function updateCartItem(user_id, product_details_id, quantity) {
     product_details_id,
     quantity,
   };
-
   await updateItem(updateItemDto);
 }
 
