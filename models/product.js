@@ -53,7 +53,7 @@ async function readProductDetails(id) {
     JOIN product_details pd ON pd.product_color_id = pc2.id
     JOIN (SELECT pcc.product_id, JSON_ARRAYAGG(JSON_OBJECT("id", pcc.id, "color", JSON_OBJECT("id", pcc.color_id, "color", ccc.color),"size_stock", ss.size_stock)) AS stockBySize
         FROM product_color pcc
-        JOIN (SELECT product_color_id, JSON_ARRAYAGG(JSON_OBJECT("size", s.size, "stock", product_details.stock)) AS size_stock
+        JOIN (SELECT product_color_id, JSON_ARRAYAGG(JSON_OBJECT("size", s.size, "stock", product_details.stock, "product_detatil_id", product_details.id)) AS size_stock
             FROM product_details
             JOIN size s on product_details.size_id = s.id
             GROUP BY product_details.product_color_id) ss ON ss.product_color_id = pcc.id
