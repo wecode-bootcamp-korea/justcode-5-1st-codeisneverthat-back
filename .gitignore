@@ -241,4 +241,8 @@ $RECYCLE.BIN/
 *.lnk
 
 data/
+<<<<<<< HEAD
+=======
+mock_examples/
+>>>>>>> main
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,linux,visualstudiocode,node

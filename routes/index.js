@@ -9,3 +9,4 @@ router.use(userRouter);
 // router.use(otherRouter);
 
 module.exports = router;
+module.exports = userRouter;
