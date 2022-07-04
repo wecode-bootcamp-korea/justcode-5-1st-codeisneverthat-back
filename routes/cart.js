@@ -9,9 +9,11 @@ const { validateToken } = require('../ middlewares/validateToken');
 
 const router = express.Router();
 
-router.get('/cart', validateToken, cartItemController);
-router.post('/cart', validateToken, addCartItemController);
-router.delete('/cart', validateToken, deleteItemController);
-router.put('/cart', validateToken, updateItemController);
+router.use(validateToken);
+
+router.get('/cart', cartItemController);
+router.post('/cart', addCartItemController);
+router.delete('/cart', deleteItemController);
+router.put('/cart', updateItemController);
 
 module.exports = router;
