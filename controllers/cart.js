@@ -8,15 +8,16 @@ const {
 } = require('../services/cart');
 
 const cartItemController = async (req, res) => {
-  const token = req.header('Authorization');
-  const user_id = jwt.verify(token, process.env.SECRET_KEY);
-  const cartItems = await getCartById(user_id);
+  // const token = req.header('Authorization');
+  // const user_id = jwt.verify(token, process.env.SECRET_KEY);
+  // const cartItems = await getCartById(user_id);
+  cartItems = req.userId;
   return res.json(cartItems);
 };
 
 const addCartItemController = async (req, res) => {
-  const token = req.header('Authorization');
-  const user_id = jwt.verify(token, process.env.SECRET_KEY);
+  // const token = req.header('Authorization');
+  // const user_id = jwt.verify(token, process.env.SECRET_KEY);
   const { product_details_id, quantity } = req.body;
   await addCartItem(user_id.id, product_details_id, quantity);
 
