@@ -5,8 +5,11 @@ const {
   deleteItemController,
   updateItemController,
 } = require('../controllers/cart');
+const { validateToken } = require('../ middlewares/validateToken');
 
 const router = express.Router();
+
+router.use(validateToken);
 
 router.get('/cart', cartItemController);
 router.post('/cart', addCartItemController);

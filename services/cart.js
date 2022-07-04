@@ -1,4 +1,10 @@
-const { addItem, deleteItem, updateItem } = require('../models/cart');
+const {
+  addItem,
+  deleteItem,
+  updateItem,
+  checkUserProductDetail,
+  updateQuantity,
+} = require('../models/cart');
 
 async function addCartItem(user_id, product_details_id, quantity) {
   const addItemDto = {
@@ -6,8 +12,17 @@ async function addCartItem(user_id, product_details_id, quantity) {
     product_details_id,
     quantity,
   };
-
-  await addItem(addItemDto);
+  const checks = await checkUserProductDetail({ user_id, product_details_id });
+  if (checks.length) {
+    const currentQuantity = checks[0].quantity + 1;
+    await updateQuantity({
+      user_id,
+      product_details_id,
+      currentQuantity,
+    });
+  } else {
+    await addItem(addItemDto);
+  }
 }
 
 async function deleteCartItem(user_id, product_details_id) {

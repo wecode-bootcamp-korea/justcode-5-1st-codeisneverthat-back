@@ -23,9 +23,32 @@ async function getCartById(user_id) {
                 FROM product_images
                 WHERE MOD(product_images.id, 2) = 1
             ) AS pi on pi.product_color_id = pc.id
-        where user_id=${user_id.id}
+        where user_id=${user_id}
     `;
   return cart;
+}
+
+async function checkUserProductDetail({ user_id, product_details_id }) {
+  return await prisma.$queryRaw`
+        SELECT
+            id,
+            quantity
+        FROM cart
+            WHERE user_id = ${user_id} AND product_details_id = ${product_details_id}
+    `;
+}
+
+async function updateQuantity({
+  user_id,
+  product_details_id,
+  currentQuantity,
+}) {
+  return await prisma.$queryRaw`
+    UPDATE cart
+    SET 
+    quantity = ${currentQuantity}
+        WHERE user_id = ${user_id} AND product_details_id = ${product_details_id}
+`;
 }
 
 async function addItem(addItemDto) {
@@ -57,4 +80,11 @@ async function updateItem(updateItemDto) {
     `;
 }
 
-module.exports = { getCartById, addItem, deleteItem, updateItem };
+module.exports = {
+  getCartById,
+  addItem,
+  deleteItem,
+  updateItem,
+  checkUserProductDetail,
+  updateQuantity,
+};
