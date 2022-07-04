@@ -1,5 +1,3 @@
-const jwt = require('jsonwebtoken');
-
 const { getCartById } = require('../models/cart');
 const {
   addCartItem,
