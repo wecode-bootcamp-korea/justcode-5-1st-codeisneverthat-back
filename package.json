@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server.js",
-    "distribute": "npm i && pm2 start server.js --name <project-back> -i max"
+    "distribute": "npm i && pm2 start server.js --name <codeisneverthat-back> -i max"
   },
   "author": "",
   "license": "ISC",
