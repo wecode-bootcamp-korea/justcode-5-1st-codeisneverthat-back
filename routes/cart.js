@@ -5,7 +5,7 @@ const {
   deleteItemController,
   updateItemController,
 } = require('../controllers/cart');
-const { validateToken } = require('../ middlewares/validateToken');
+const { validateToken } = require('../middlewares/validateToken');
 
 const router = express.Router();
 
