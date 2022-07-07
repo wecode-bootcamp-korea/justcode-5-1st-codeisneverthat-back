@@ -38,16 +38,12 @@ async function checkUserProductDetail({ user_id, product_details_id }) {
     `;
 }
 
-async function updateQuantity({
-  user_id,
-  product_details_id,
-  currentQuantity,
-}) {
+async function updateQuantity({ cartId, currentQuantity }) {
   return await prisma.$queryRaw`
     UPDATE cart
     SET 
     quantity = ${currentQuantity}
-        WHERE user_id = ${user_id} AND product_details_id = ${product_details_id}
+        WHERE cart.id = ${cartId}
 `;
 }
 
@@ -61,22 +57,22 @@ async function addItem(addItemDto) {
 }
 
 async function deleteItem(deleteItemDto) {
-  const { user_id, product_details_id } = deleteItemDto;
+  const { cartId } = deleteItemDto;
 
   await prisma.$queryRaw`
         DELETE FROM CART 
-        WHERE ${user_id} = cart.user_id AND ${product_details_id} = cart.product_details_id; 
+        WHERE cart.id = ${cartId}
     `;
 }
 
 async function updateItem(updateItemDto) {
-  const { user_id, product_details_id, quantity } = updateItemDto;
+  const { cartId, quantity } = updateItemDto;
   await prisma.$queryRaw`
         UPDATE 
             cart
         SET
             quantity = ${quantity}
-        WHERE ${user_id} = cart.user_id AND ${product_details_id} = cart.product_details_id; 
+        WHERE cart.id ${cartId}; 
     `;
 }
 

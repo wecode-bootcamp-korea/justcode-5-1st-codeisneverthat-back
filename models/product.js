@@ -60,7 +60,7 @@ async function readProductDetails(id) {
         JOIN color ccc on ccc.id = pcc.color_id
         GROUP BY pcc.product_id) piJA on piJA.product_id = p.id
     GROUP BY pa.product_id
-    HAVING pa.product_id = ${id};
+    WHERE p.id = ${id};
     `;
   return productDetails;
 }

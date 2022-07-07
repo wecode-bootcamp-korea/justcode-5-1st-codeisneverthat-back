@@ -12,4 +12,3 @@ router.use(productRouter);
 router.use('/cart', validateToken, cartRouter);
 
 module.exports = router;
-(module.exports = userRouter), productRouter, cartRouter;

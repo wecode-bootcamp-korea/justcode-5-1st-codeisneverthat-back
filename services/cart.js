@@ -25,18 +25,13 @@ async function addCartItem(user_id, product_details_id, quantity) {
   }
 }
 
-async function deleteCartItem(user_id, product_details_id) {
-  const deleteItemDto = {
-    user_id,
-    product_details_id,
-  };
-  await deleteItem(deleteItemDto);
+async function deleteCartItem(cartId) {
+  await deleteItem(cartId);
 }
 
-async function updateCartItem(user_id, product_details_id, quantity) {
+async function updateCartItem(cartId, quantity) {
   const updateItemDto = {
-    user_id,
-    product_details_id,
+    cartId,
     quantity,
   };
   await updateItem(updateItemDto);
