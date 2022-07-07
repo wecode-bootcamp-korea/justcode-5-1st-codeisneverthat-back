@@ -1,6 +1,6 @@
 const { signup, login } = require('../services/user');
 
-async function signupController(req, res) {
+async function signup(req, res) {
   const { email, password } = req.body;
   try {
     await signup(email, password);
@@ -11,7 +11,7 @@ async function signupController(req, res) {
   }
 }
 
-async function loginController(req, res) {
+async function login(req, res) {
   const { email, password } = req.body;
   try {
     const token = await login(email, password);
@@ -22,4 +22,4 @@ async function loginController(req, res) {
   }
 }
 
-module.exports = { signupController, loginController };
+module.exports = { signup, login };

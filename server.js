@@ -3,17 +3,13 @@ require('dotenv').config();
 const http = require('http');
 const express = require('express');
 const cors = require('cors');
-
-const userRouter = require('./routes/user');
-const productRouter = require('./routes/product');
-const cartRouter = require('./routes/cart');
+const router = require('./routes');
 
 const app = express();
+
 app.use(cors());
 app.use(express.json());
-app.use(userRouter);
-app.use(productRouter);
-app.use(cartRouter);
+app.use(router());
 
 app.get('/ping', (req, res) => {
   res.json({ message: 'pong' });

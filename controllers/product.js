@@ -4,7 +4,7 @@ const {
   readCollectionListByCategory,
 } = require('../models/product');
 
-const readTop20Controller = async (req, res) => {
+const readTop20 = async (req, res) => {
   try {
     const top20 = await readTop20();
     return res.status(200).json(top20);
@@ -13,7 +13,7 @@ const readTop20Controller = async (req, res) => {
   }
 };
 
-const readProductDetailsController = async (req, res) => {
+const readProductDetails = async (req, res) => {
   try {
     const { id } = req.query;
     const [productDetails] = await readProductDetails(id);
@@ -23,7 +23,7 @@ const readProductDetailsController = async (req, res) => {
   }
 };
 
-const readCollectionListByCategoryController = async (req, res) => {
+const readCollectionListByCategory = async (req, res) => {
   try {
     const { category } = req.query;
     const collectionList = await readCollectionListByCategory(category);
@@ -34,7 +34,7 @@ const readCollectionListByCategoryController = async (req, res) => {
 };
 
 module.exports = {
-  readTop20Controller,
-  readProductDetailsController,
-  readCollectionListByCategoryController,
+  readTop20,
+  readProductDetails,
+  readCollectionListByCategory,
 };

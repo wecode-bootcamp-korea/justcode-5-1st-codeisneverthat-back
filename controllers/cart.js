@@ -5,13 +5,13 @@ const {
   updateCartItem,
 } = require('../services/cart');
 
-const cartItemController = async (req, res) => {
+const readCartItems = async (req, res) => {
   const userId = req.userId;
   const cartItems = await getCartById(userId);
   return res.json(cartItems);
 };
 
-const addCartItemController = async (req, res) => {
+const addCartItem = async (req, res) => {
   const userId = req.userId;
   const { product_details_id, quantity } = req.body;
   await addCartItem(userId, product_details_id, quantity);
@@ -19,15 +19,15 @@ const addCartItemController = async (req, res) => {
   res.status(201).json({ message: 'item added successfully' });
 };
 
-const deleteItemController = async (req, res) => {
+const deleteCartItem = async (req, res) => {
   const userId = req.userId;
   const { product_details_id } = req.body;
   await deleteCartItem(userId, product_details_id);
 
-  res.status(201).json({ message: 'item deleted successfully' });
+  res.status(204);
 };
 
-const updateItemController = async (req, res) => {
+const updateCartItem = async (req, res) => {
   const userId = req.userId;
   const { product_details_id, quantity, cal } = req.body;
   if (cal === 'minus') {
@@ -40,8 +40,8 @@ const updateItemController = async (req, res) => {
 };
 
 module.exports = {
-  cartItemController,
-  addCartItemController,
-  deleteItemController,
-  updateItemController,
+  readCartItems,
+  addCartItem,
+  deleteCartItem,
+  updateCartItem,
 };

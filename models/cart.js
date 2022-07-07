@@ -1,7 +1,7 @@
 const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
-async function getCartById(user_id) {
+async function getCartItemsById(user_id) {
   const cart = prisma.$queryRaw`
         SELECT
             cart.id,
@@ -81,7 +81,7 @@ async function updateItem(updateItemDto) {
 }
 
 module.exports = {
-  getCartById,
+  getCartItemsById,
   addItem,
   deleteItem,
   updateItem,
