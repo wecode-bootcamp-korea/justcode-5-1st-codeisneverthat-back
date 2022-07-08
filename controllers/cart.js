@@ -14,7 +14,6 @@ const addCartItem = async (req, res) => {
   await cartService.addCartItem(userId, product_details_id, quantity);
 
   res.status(201).json({ message: 'item added successfully' });
-  console.log(res);
 };
 
 const deleteCartItem = async (req, res) => {
