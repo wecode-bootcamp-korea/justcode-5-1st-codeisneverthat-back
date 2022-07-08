@@ -2,7 +2,7 @@ const { PrismaClient } = require('@prisma/client');
 const prisma = new PrismaClient();
 
 //Top 20 리스트 가져오기 + 컬러별 대표 이미지
-async function readTop20() {
+async function readTop20(limit = 20) {
   const top20 = await prisma.$queryRaw`
     SELECT p.id, p.name AS productName, cg.category, JSON_ARRAYAGG(JSON_OBJECT("id", pa.id, "color", JSON_OBJECT("id", pa.color_id, "color", pa.color), "images", pa.images)) AS colorImage, p.sales_count
     FROM (
@@ -18,7 +18,7 @@ async function readTop20() {
     JOIN products p ON p.id = pa.product_id
     JOIN category cg ON cg.id = p.category_id
     GROUP BY product_id, sales_count
-    ORDER BY sales_count DESC limit 20
+    ORDER BY sales_count DESC limit ${limit}
     `;
   return top20;
 }
@@ -60,7 +60,7 @@ async function readProductDetails(id) {
         JOIN color ccc on ccc.id = pcc.color_id
         GROUP BY pcc.product_id) piJA on piJA.product_id = p.id
     GROUP BY pa.product_id
-    HAVING pa.product_id = ${id};
+    HAVING p.id = ${id};
     `;
   return productDetails;
 }

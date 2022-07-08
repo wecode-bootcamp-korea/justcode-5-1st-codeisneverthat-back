@@ -15,9 +15,9 @@ async function addCartItem(user_id, product_details_id, quantity) {
   const checks = await checkUserProductDetail({ user_id, product_details_id });
   if (checks.length) {
     const currentQuantity = checks[0].quantity + 1;
+    const cartId = checks[0].id;
     await updateQuantity({
-      user_id,
-      product_details_id,
+      cartId,
       currentQuantity,
     });
   } else {
@@ -25,18 +25,13 @@ async function addCartItem(user_id, product_details_id, quantity) {
   }
 }
 
-async function deleteCartItem(user_id, product_details_id) {
-  const deleteItemDto = {
-    user_id,
-    product_details_id,
-  };
-  await deleteItem(deleteItemDto);
+async function deleteCartItem(cartId) {
+  await deleteItem(cartId);
 }
 
-async function updateCartItem(user_id, product_details_id, quantity) {
+async function updateCartItem(cartId, quantity) {
   const updateItemDto = {
-    user_id,
-    product_details_id,
+    cartId,
     quantity,
   };
   await updateItem(updateItemDto);

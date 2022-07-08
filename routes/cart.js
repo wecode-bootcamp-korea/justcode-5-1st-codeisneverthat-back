@@ -1,19 +1,16 @@
 const express = require('express');
 const {
-  cartItemController,
-  addCartItemController,
-  deleteItemController,
-  updateItemController,
+  readCartItems,
+  addCartItem,
+  deleteCartItem,
+  updateCartItem,
 } = require('../controllers/cart');
-const { validateToken } = require('../middlewares/validateToken');
 
 const router = express.Router();
 
-router.use(validateToken);
-
-router.get('/cart', cartItemController);
-router.post('/cart', addCartItemController);
-router.delete('/cart', deleteItemController);
-router.put('/cart', updateItemController);
+router.get('/', readCartItems);
+router.post('/', addCartItem);
+router.delete('/:id', deleteCartItem);
+router.put('/:id', updateCartItem);
 
 module.exports = router;
