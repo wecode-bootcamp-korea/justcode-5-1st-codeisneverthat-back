@@ -56,9 +56,7 @@ async function addItem(addItemDto) {
     `;
 }
 
-async function deleteItem(deleteItemDto) {
-  const { cartId } = deleteItemDto;
-
+async function deleteItem(cartId) {
   await prisma.$queryRaw`
         DELETE FROM CART 
         WHERE cart.id = ${cartId}
@@ -72,7 +70,7 @@ async function updateItem(updateItemDto) {
             cart
         SET
             quantity = ${quantity}
-        WHERE cart.id ${cartId}; 
+        WHERE cart.id =${cartId}; 
     `;
 }
 

@@ -40,11 +40,12 @@ async function login(email, password) {
   }
 
   const user = await readUserByEmail(email);
-
+  console.log(process.env.SECRET_KEY);
   if (bcrypt.compareSync(password, user.password)) {
     const token = jwt.sign({ id: user.id }, process.env.SECRET_KEY, {
       expiresIn: '1d',
     });
+
     return token;
   } else {
     const error = new Error('Login fails');

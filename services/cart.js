@@ -12,7 +12,9 @@ async function addCartItem(user_id, product_details_id, quantity) {
     product_details_id,
     quantity,
   };
+  console.log('add', addItemDto);
   const checks = await checkUserProductDetail({ user_id, product_details_id });
+  console.log('check', checks);
   if (checks.length) {
     const currentQuantity = checks[0].quantity + 1;
     await updateQuantity({
@@ -27,6 +29,7 @@ async function addCartItem(user_id, product_details_id, quantity) {
 
 async function deleteCartItem(cartId) {
   await deleteItem(cartId);
+  console.log('service', cartId);
 }
 
 async function updateCartItem(cartId, quantity) {
