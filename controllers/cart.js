@@ -23,7 +23,7 @@ const deleteCartItem = async (req, res) => {
   } catch (err) {
     console.log(err);
   }
-  res.status(204);
+  res.sendStatus(204);
 };
 
 const updateCartItem = async (req, res) => {

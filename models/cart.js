@@ -43,7 +43,7 @@ async function updateQuantity({ cartId, currentQuantity }) {
     UPDATE cart
     SET 
     quantity = ${currentQuantity}
-        WHERE cart.id = ${cartId}
+    WHERE cart.id = ${cartId}
 `;
 }
 
